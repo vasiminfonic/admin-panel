@@ -13,11 +13,15 @@ router.delete('/employ',employController.remove);
 router.get('/employ/:id',employController.getOne);
 router.get('/employ',employController.getList);
 router.get('/employpos',employController.getEmployPostion);
+router.get('/employs/status/:status',employController.getStatus);
+router.get('/employs/total',employController.getTotal);
+
 
 
 router.get('/department',departmentController.getList);
 router.post('/department',departmentController.addList);
 router.put('/department',departmentController.updateList);
+router.get('/department/total',departmentController.getTotal);
 router.delete('/department/:_id',departmentController.deleteList);
 
 

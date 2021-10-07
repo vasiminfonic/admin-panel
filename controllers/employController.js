@@ -317,11 +317,43 @@ const employController = {
             const total = await Employ.countDocuments();
             const employ = await Employ.find().skip(+(+page * +row)).limit(+row).select('-updatedAt -__v')
                 .sort({ _id: -1 });
+            if(!employ){
+                 employint = await Employ.find().skip(+(0)).limit(+row).select('-updatedAt -__v')
+                .sort({ _id: -1 });
+                if(!employint){
+                    return next(customErrorHandler.serverError())
+                }
+                return res.json({data: employint, total});
+            }    
             return res.json({data: employ, total});
         } catch (err) {
             next(customErrorHandler.serverError(err))
         }
 
+    },
+    async getStatus(req, res, next) {
+        let { status } = req.params;
+        console.log('visited',status)
+        try {
+            const total = await Employ.countDocuments({status});
+            if(!total){
+                return next(customErrorHandler.serverError());
+            }
+            return res.json({message: `Total Number Of ${status ==='active' ? 'Active' : 'Former'} Imployee ${total}`, total});
+        } catch (err) {
+            next(customErrorHandler.serverError(err))
+        }
+    },
+    async getTotal(req, res, next) {
+        try {
+            const total = await Employ.countDocuments();
+            if(!total){
+                return next(customErrorHandler.serverError());
+            }
+            return res.json({message: `Total Number Of Imployee ${total}`, total});
+        } catch (err) {
+            next(customErrorHandler.serverError(err))
+        }
     }
 
 

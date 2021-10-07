@@ -91,6 +91,19 @@ const departmentController = {
         }catch(err){
             return next(customErrorHandler.serverError(err))
         }
-    }
+    },
+
+    async getTotal(req, res, next){
+        try{
+            const total = await Department.countDocuments();
+            if(!total){
+                return next(customErrorHandler.serverError());
+            }
+            return res.status(200).json({message: `Total Number Of Department ${total}`, total});
+        }catch(err){
+            console.log(err)
+            return next(customErrorHandler.serverError(err));
+        }
+    },
 }
 export default departmentController;
