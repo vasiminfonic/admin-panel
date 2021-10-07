@@ -111,7 +111,7 @@ const employController = {
                         salary,
                         dob
                     });
-                    res.status(201).json(employ);
+                    res.status(200).json({message: 'Employee Has Been Registered Successfully',data: employ});
                 } catch (err) {
                     console.log(err);
                     if (filePath) {
@@ -215,7 +215,7 @@ const employController = {
                     dob
                 }, { new: true }
                 );
-                res.status(201).json(employ);
+                res.status(201).json({message: 'Employee Profile Update Successfully',data: employ});
             } catch (err) {
                 if (filePath) {
                     fs.unlink(`${appRoot}/${filePath}`, (err) => {
