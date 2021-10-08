@@ -21,8 +21,8 @@ const storage = multer.diskStorage({
 
 export const handleMultipartData = multer({
     storage,
-    limits: { fileSize: 1000000 * 5 },
-}).single('image'); // 5mb
+    limits: { fileSize: 1000000 * 50 },
+}).single('image'); // 50mb
 
 
 const employController = {
