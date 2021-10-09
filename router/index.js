@@ -17,6 +17,8 @@ router.get('/employs/status/:status',employController.getStatus);
 router.get('/employs/total',employController.getTotal);
 
 
+router.get('/employee/status/:status',employController.getStatusData);
+
 
 router.get('/department',departmentController.getList);
 router.post('/department',departmentController.addList);

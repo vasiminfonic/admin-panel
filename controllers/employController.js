@@ -354,9 +354,30 @@ const employController = {
         } catch (err) {
             next(customErrorHandler.serverError(err))
         }
+    },
+    async getStatusData(req,res,next){
+        let { status } = req.params;
+        let { page, row } = req.query
+        if (page < 0 || row < 1) {
+            page = 0
+            row = 1
+        }
+        try {
+            const total = await Employ.countDocuments({status});
+            const employ = await Employ.find({status}).skip(+(+page * +row)).limit(+row).select('-updatedAt -__v')
+                .sort({ _id: -1 });
+            if(!employ){
+                 employint = await Employ.find({status}).skip(+(0)).limit(+row).select('-updatedAt -__v')
+                .sort({ _id: -1 });
+                if(!employint){
+                    return next(customErrorHandler.serverError())
+                }
+                return res.json({data: employint, total});
+            }    
+            return res.json({data: employ, total});
+        } catch (err) {
+            next(customErrorHandler.serverError(err))
+        }
     }
-
-
-
 }
 export default employController;
