@@ -29,8 +29,7 @@ const employController = {
 
 
     async register(req, res, next) {
-        console.log(req.body);
-        console.log(req.file);
+      
         //  console.log(req.files)
         const { name, father, email, dob, mobileNo, address, position, department, joinDate, status, salary, title, formerDate } = req.body;
         const registerSchema = Joi.object({
@@ -56,8 +55,7 @@ const employController = {
             if (!!req.file) {
                 filePath = req.file.path;
             }
-            console.log(req.body);
-            console.log(req.file)
+           
 
 
             if (error) {
@@ -296,7 +294,7 @@ const employController = {
 
     async getEmployPostion(req, res, next) {
         const { position, department} = req.query;
-        console.log(req.query);
+       
         try {
             const employ = await Employ.findOne({$and: [{department},{position}]}).select('-updatedAt -__v')
             return res.json(employ);
@@ -332,7 +330,7 @@ const employController = {
     },
     async getStatus(req, res, next) {
         let { status } = req.params;
-        console.log('visited',status)
+       
         try {
             const total = await Employ.countDocuments({status});
             if(!total){

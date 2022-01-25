@@ -41,7 +41,6 @@ app.use(express.static('react/build'))
 
 const filePath = path.resolve(__dirname, 'react/build', 'index.html');
 app.get('/*', function(request, response) {
-  console.log('Home Page');
   fs.readFile(filePath, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
