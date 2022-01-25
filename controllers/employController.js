@@ -9,7 +9,7 @@ import customErrorHandler from "../services/customErrorHandler";
 
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'uploads/'),
+    destination: (req, file, cb) => cb(null, 'uploads/user'),
     filename: (req, file, cb) => {
         const uniqueName = `${Date.now()}-${Math.round(
             Math.random() * 1e9
@@ -70,7 +70,6 @@ const employController = {
                             );
                         }
                     });
-
                 }
 
                 return next(error);
